@@ -1,0 +1,21 @@
+# This was a particularly fun solve even if it was in easy
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        rum_Int = {"I":1, "V":5, "X":10, "L":50, "C":100, "D":500, "M":1000}
+        lenofStr = len(s)
+        TransNum = []
+        for val in s:
+            TransNum.append(rum_Int[val])
+        x = 0
+        numSum = 0
+        while x < lenofStr - 1:  
+            if TransNum[x] < TransNum[x+1]:
+                numSum = numSum + (TransNum[x+1] - TransNum[x])
+                x += 2  # Fix: Use x += 2 instead of x + 2
+            else:
+                numSum = numSum + TransNum[x]
+                x += 1
+                
+        if x == lenofStr - 1:
+            numSum += TransNum[x]
+        return numSum
